@@ -10,6 +10,7 @@ abstract public class BoardLogic {
     public void f(){
         board.doMove(new Move(Square.E2, Square.E4));
         System.out.println(board.toString());
+
     }
     public void getBoard(){
 

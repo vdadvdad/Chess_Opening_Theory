@@ -32,7 +32,7 @@ import com.example.openingtheory.ui.theme.ChessOpeningTheoryTheme
 import com.github.bhlangonijr.chesslib.Piece
 import com.github.bhlangonijr.chesslib.Square
 
-var piecesList: MutableList<Int> = mutableStateListOf()
+var san = ""
 class MainActivity : ComponentActivity() {
 
 
@@ -42,8 +42,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             var navController = rememberNavController()
             NavHost(navController = navController, startDestination = "CourseList"){
-                composable("CourseList") { CourseList()}
-                composable("Training"){Training(navController)}
+                composable("CourseList") { CourseList(navController)}
+                composable("Training"){Training(navController, san)}
             }
             ChessOpeningTheoryTheme {
                 // A surface container using the 'background' color from the theme

@@ -39,7 +39,7 @@ var currentMove = 0
 var boardEnabled = false
 var reviseMode = mutableStateOf(false)
 var reviseStarted = false
-fun getCurrentMove(): Move {
+fun getCurrentMove(currentMove: Int): Move {
     return moveList[currentMove]
 }
 @Composable
@@ -131,16 +131,19 @@ fun Training(navController: NavController, san: String){
 fun SquareButton(color: Color, size: Dp, square: String, i: Int, j: Int, context: Context){
     Button(
         onClick = {
-            if (boardEnabled){
-                Log.d("currentMove", getCurrentMove().toString())
+            if (boardEnabled && reviseMode.value){
+                Log.d("currentMove", getCurrentMove(currentMove).toString())
                 Log.d("currentMoveInt", currentMove.toString())
-                if (NewMove.SquareClicked(square, getCurrentMove(), reviseStarted)){
+                var r = NewMove.SquareClicked(square, getCurrentMove(currentMove), reviseStarted)
+                Log.d("r", r)
+                updateBoard()
+                if (r.equals("true")){
                     currentMove += 1
                 }
+
                 else{
                     Toast.makeText(context, "Неверный ход", Toast.LENGTH_SHORT)
                 }
-                updateBoard()
             }
         },
         modifier = Modifier.size(size),
